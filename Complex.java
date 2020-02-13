@@ -39,6 +39,46 @@ class Complex{
        // Fill in this constructor.
        // It should accept expressions like "-2+3i", "2-3i", "3", "5i", etc..
        // Throw a NumberFormatException if s cannot be parsed as Complex.
+       s = s.trim();
+       String NUM = "(\\d+\\.\\d*|\\.?\\d+)";
+       String SGN = "[+-]?";
+       String OP =  "\\s*[+-]\\s*";
+       String I =   "i";
+       String OR =  "|";
+       String REAL = SGN+NUM;
+       String IMAG = SGN+NUM+"?"+I;
+       String COMP = REAL+OR+
+                     IMAG+OR+
+                     REAL+OP+NUM+"?"+I;
+      
+      System.out.println(s);
+       
+       if( !s.matches(COMP) ){
+          throw new NumberFormatException(
+                    "Cannot parse input string \""+s+"\" as Complex");
+       }
+       s = s.replaceAll("\\s","");     
+       if( s.matches(REAL) ){
+          System.out.println("S matches REAL");
+          this.re = Double.parseDouble(s);
+          this.im = 0;
+       }else if( s.matches(SGN+I) ){
+         System.out.println("S matches sgn+i");
+          this.re = 0;
+          this.im = Double.parseDouble( s.replace( I, "1.0" ) );
+       }else if( s.matches(IMAG) ){
+         System.out.println("S matches imag");
+          this.re = 0;
+          this.im = Double.parseDouble( s.replace( I , "" ) );
+       }else if( s.matches(REAL+OP+I) ){
+         System.out.println("S matches REAL+op+i");
+          this.re = Double.parseDouble( s.replaceAll( "("+REAL+")"+OP+".+" , "$1" ) );
+          this.im = Double.parseDouble( s.replaceAll( ".+("+OP+")"+I , "$1"+"1.0" ) );
+       }else{   //  s.matches(REAL+OP+NUM+I) 
+         System.out.println("S matches real+op+num+i");
+          this.re = Double.parseDouble( s.replaceAll( "("+REAL+").+"  , "$1" ) );
+          this.im = Double.parseDouble( s.replaceAll( ".+("+OP+NUM+")"+I , "$1" ) );
+       }
     }
  
     //---------------------------------------------------------------------------
@@ -51,30 +91,37 @@ class Complex{
     // Return a new Complex equal to this Complex
     Complex copy(){
        // Fill in
+       Complex ans = new Complex(0); //place holder
+       return ans;
     }
     
     // add()
     // Return a new Complex representing the sum this plus z.
     Complex add(Complex z){
        // Fill in
+       return z;
     }
     
     // negate()
     // Return a new Complex representing the negative of this.
     Complex negate(){
        // Fill in
+       Complex ans = new Complex(0); //place holder
+       return ans;
     }
  
     // sub()
     // Return a new Complex representing the difference this minus z.
     Complex sub(Complex z){
        // Fill in
+       return z;
     }
  
     // mult()
     // Return a new Complex representing the product this times z.
     Complex mult(Complex z){
        // Fill in
+       return z;
     }
  
     // recip()
@@ -83,6 +130,8 @@ class Complex{
     // this.equals(Complex.ZERO).
     Complex recip(){
        // Fill in
+       Complex ans = new Complex(0); //place holder
+       return ans;
     }
  
     // div()
@@ -91,12 +140,15 @@ class Complex{
     // z.equals(Complex.ZERO).
     Complex div(Complex z){
        // Fill in
+       return z;
     }
  
     // conj()
     // Return a new Complex representing the conjugate of this Complex.
     Complex conj(){
        // Fill in
+       Complex ans = new Complex(0); //place holder
+       return ans;
     }
     
     // Re()
@@ -116,6 +168,8 @@ class Complex{
     // points (0, 0) and (re, im).
     double abs(){
        // Fill in
+       double ans = 0;
+       return ans;
     }
  
     // arg()
@@ -133,31 +187,61 @@ class Complex{
     // truncated from the two parts. The String returned will be readable by 
     // the constructor Complex(String s)
     public String toString(){
-       // Fill in
-    }
+      String fmt   = "%.8f";
+      String real  = Double.toString(Double.parseDouble(String.format(fmt, this.re)));
+      String imag  = Double.toString(Double.parseDouble(String.format(fmt, this.im)));
+      String reStr = (
+                        this.re==0 && this.im==0?
+                           "0"
+                        :this.re==0?
+                           ""
+                        :
+                           real
+                     );
+      String imStr = (
+                        this.im==0?
+                           ""
+                        :this.im==1?
+                           "i"
+                        :this.im==-1?
+                           "-i"
+                        :this.im<0 || this.re==0?
+                           imag+"i"
+                        :
+                           "+"+imag+"i"
+                     );
+      return reStr+imStr;
+   }
  
     // equals()
     // Return true iff this and obj have the same real and imaginary parts.
-    public boolean equals(Object obj){
-       // Fill in
+    public boolean equals(Object x){
+      boolean eq = false;
+      Complex r;
+
+      if( x instanceof Complex ){
+         r = (Complex) x;
+         eq = ( this.re==r.re && this.im==r.im );
+      }
+      return eq;
     }
  
     // valueOf()
     // Return a new Complex with real part a and imaginary part b.
     static Complex valueOf(double a, double b){
-       // Fill in
+       return( new Complex(a,b) );
     }
  
     // valueOf()
     // Return a new Complex with real part a and imaginary part 0.
     static Complex valueOf(double a){
-       // Fill in
+      return( new Complex(a) );
     }
  
     // valueOf()
     // Return a new Complex constructed from s.
     static Complex valueOf(String s){
-       // Fill in
+      return (new Complex(s));
     }
  
  }

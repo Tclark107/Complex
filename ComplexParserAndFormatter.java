@@ -40,7 +40,7 @@
 class ComplexParserAndFormatter{
 
     public static void main(String[] args){
-       String[] str =  {"3.5-4.2i", 
+       String[] str =  {"3.5-4.2i",
                         "3.5+4.2i", 
                         "3.4", "4.2i", 
                         "0", 
@@ -78,6 +78,8 @@ class ComplexParserAndFormatter{
        String COMP = REAL+OR+
                      IMAG+OR+
                      REAL+OP+NUM+"?"+I;
+      
+      System.out.println(s);
        
        if( !s.matches(COMP) ){
           throw new NumberFormatException(
@@ -85,18 +87,23 @@ class ComplexParserAndFormatter{
        }
        s = s.replaceAll("\\s","");     
        if( s.matches(REAL) ){
+          System.out.println("S matches REAL");
           part[0] = Double.parseDouble(s);
           part[1] = 0;
        }else if( s.matches(SGN+I) ){
+         System.out.println("S matches sgn+i");
           part[0] = 0;
           part[1] = Double.parseDouble( s.replace( I, "1.0" ) );
        }else if( s.matches(IMAG) ){
+         System.out.println("S matches imag");
           part[0] = 0;
           part[1] = Double.parseDouble( s.replace( I , "" ) );
        }else if( s.matches(REAL+OP+I) ){
+         System.out.println("S matches REAL+op+i");
           part[0] = Double.parseDouble( s.replaceAll( "("+REAL+")"+OP+".+" , "$1" ) );
           part[1] = Double.parseDouble( s.replaceAll( ".+("+OP+")"+I , "$1"+"1.0" ) );
        }else{   //  s.matches(REAL+OP+NUM+I) 
+         System.out.println("S matches real+op+num+i");
           part[0] = Double.parseDouble( s.replaceAll( "("+REAL+").+"  , "$1" ) );
           part[1] = Double.parseDouble( s.replaceAll( ".+("+OP+NUM+")"+I , "$1" ) );
        }
