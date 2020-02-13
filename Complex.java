@@ -110,16 +110,17 @@ class Complex{
     // sub()
     // Return a new Complex representing the difference this minus z.
     Complex sub(Complex z){
-       double real = this.re - z.re;
-       double imag = this.im - z.im;
+       double real = re - z.re;
+       double imag = im - z.im;
        return (new Complex (real,imag));
     }
  
     // mult()
     // Return a new Complex representing the product this times z.
     Complex mult(Complex z){
-       // Fill in
-       return z;
+       double real = (re * z.re) - (im * z.im);
+       double imag = (re * z.im) + (z.re * im);
+       return (new Complex(real,imag));
     }
  
     // recip()
@@ -144,9 +145,7 @@ class Complex{
     // conj()
     // Return a new Complex representing the conjugate of this Complex.
     Complex conj(){
-       // Fill in
-       Complex ans = new Complex(0); //place holder
-       return ans;
+       return (new Complex(re, -im));
     }
     
     // Re()
