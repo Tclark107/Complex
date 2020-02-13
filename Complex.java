@@ -90,16 +90,15 @@ class Complex{
     // copy()
     // Return a new Complex equal to this Complex
     Complex copy(){
-       // Fill in
-       Complex ans = new Complex(0); //place holder
-       return ans;
+       return(new Complex(this.re, this.im));
     }
     
     // add()
     // Return a new Complex representing the sum this plus z.
     Complex add(Complex z){
-       // Fill in
-       return z;
+      double real = this.re + z.re;
+      double imag = this.im + z.im;
+      return (new Complex(real,imag));
     }
     
     // negate()
@@ -113,8 +112,9 @@ class Complex{
     // sub()
     // Return a new Complex representing the difference this minus z.
     Complex sub(Complex z){
-       // Fill in
-       return z;
+       double real = this.re - z.re;
+       double imag = this.im - z.im;
+       return (new Complex (real,imag));
     }
  
     // mult()
