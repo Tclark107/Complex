@@ -164,9 +164,7 @@ class Complex{
     // Return the modulus of this Complex, i.e. the distance between 
     // points (0, 0) and (re, im).
     double abs(){
-       // Fill in
-       double ans = 0;
-       return ans;
+       return Math.sqrt((im*im)+(re*re));
     }
  
     // arg()
