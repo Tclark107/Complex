@@ -128,9 +128,8 @@ class Complex{
     // Throw an ArithmeticException with appropriate message if 
     // this.equals(Complex.ZERO).
     Complex recip(){
-       // Fill in
-       Complex ans = new Complex(0); //place holder
-       return ans;
+       Complex r = (this.mult(conj()).div(conj()));
+       return r;
     }
  
     // div()
@@ -138,8 +137,9 @@ class Complex{
     // Throw an ArithmeticException with appropriate message if 
     // z.equals(Complex.ZERO).
     Complex div(Complex z){
-       // Fill in
-       return z;
+       double real = ((re*z.re) + (im*z.im))/((re*re) + (im*im));
+       double imag = ((re*z.im) - (z.re*im))/((re*re) + (im*im));
+       return(new Complex(real, imag));
     }
  
     // conj()

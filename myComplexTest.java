@@ -8,15 +8,15 @@ import java.io.*;
 class myComplexTest{
    
    public static void main(String[] args) throws IOException{
-      Complex C = new Complex(9,-8);
-      Complex A = new Complex("4.5 - 5.1i");
+      Complex C = new Complex(2,-3);
+      Complex A = new Complex("100");
+      Complex B;
 
       System.out.println(C.toString());
       System.out.println(A.toString());
-      A = A.conj();
-      C = C.conj();
-      System.out.println(A.toString());
-      System.out.println(C.toString());
+      //B = C.div(A);
+      B = C.recip();
+      System.out.println(B.toString());
       //System.out.println(A.negate());
       //System.out.println(C.negate());
    }
