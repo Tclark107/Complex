@@ -13,6 +13,7 @@ class myComplexTest{
         
         C = C.sub(A);
         System.out.println(C.toString());
-
+        System.out.println(A.negate());
+        System.out.println(C.negate());
    }
 }

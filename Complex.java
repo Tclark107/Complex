@@ -104,9 +104,7 @@ class Complex{
     // negate()
     // Return a new Complex representing the negative of this.
     Complex negate(){
-       // Fill in
-       Complex ans = new Complex(0); //place holder
-       return ans;
+       return (new Complex(-this.re,-this.im));
     }
  
     // sub()
