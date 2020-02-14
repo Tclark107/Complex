@@ -59,23 +59,23 @@ class Complex{
        }
        s = s.replaceAll("\\s","");     
        if( s.matches(REAL) ){
-          System.out.println("S matches REAL");
+          //System.out.println("S matches REAL");
           this.re = Double.parseDouble(s);
           this.im = 0;
        }else if( s.matches(SGN+I) ){
-         System.out.println("S matches sgn+i");
+         //System.out.println("S matches sgn+i");
           this.re = 0;
           this.im = Double.parseDouble( s.replace( I, "1.0" ) );
        }else if( s.matches(IMAG) ){
-         System.out.println("S matches imag");
+         //System.out.println("S matches imag");
           this.re = 0;
           this.im = Double.parseDouble( s.replace( I , "" ) );
        }else if( s.matches(REAL+OP+I) ){
-         System.out.println("S matches REAL+op+i");
+         //System.out.println("S matches REAL+op+i");
           this.re = Double.parseDouble( s.replaceAll( "("+REAL+")"+OP+".+" , "$1" ) );
           this.im = Double.parseDouble( s.replaceAll( ".+("+OP+")"+I , "$1"+"1.0" ) );
        }else{   //  s.matches(REAL+OP+NUM+I) 
-         System.out.println("S matches real+op+num+i");
+         //System.out.println("S matches real+op+num+i");
           this.re = Double.parseDouble( s.replaceAll( "("+REAL+").+"  , "$1" ) );
           this.im = Double.parseDouble( s.replaceAll( ".+("+OP+NUM+")"+I , "$1" ) );
        }
@@ -128,7 +128,8 @@ class Complex{
     // Throw an ArithmeticException with appropriate message if 
     // this.equals(Complex.ZERO).
     Complex recip(){
-       Complex r = (this.mult(conj()).div(conj()));
+       //Complex r = (this.mult(conj()).div(conj()));
+      Complex r = conj().div(this.mult(conj()));
        return r;
     }
  
@@ -137,8 +138,8 @@ class Complex{
     // Throw an ArithmeticException with appropriate message if 
     // z.equals(Complex.ZERO).
     Complex div(Complex z){
-       double real = ((re*z.re) + (im*z.im))/((re*re) + (im*im));
-       double imag = ((re*z.im) - (z.re*im))/((re*re) + (im*im));
+       double real = ((re*z.re) + (im*z.im))/((z.re*z.re) + (z.im*z.im));
+       double imag = ((z.re*im) - (re*z.im))/((z.re*z.re) + (z.im*z.im));
        return(new Complex(real, imag));
     }
  

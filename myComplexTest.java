@@ -9,7 +9,7 @@ class myComplexTest{
    
    public static void main(String[] args) throws IOException{
       Complex C = new Complex(2,-3);
-      Complex A = new Complex("-10");
+      Complex A = new Complex("1-i");
       Complex B;
       double abs;
 
@@ -19,7 +19,8 @@ class myComplexTest{
       abs = A.abs();
       System.out.println(B.toString());
       System.out.println(abs);
-
+      
+      System.out.println(C.equals(Complex.ZERO));
       //System.out.println(A.negate());
       //System.out.println(C.negate());
    }
