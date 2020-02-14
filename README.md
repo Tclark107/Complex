@@ -1,5 +1,4 @@
 # Complex
 
-# It now correctly parses imaginary numbers.
-# The static functions and equals seem like they are operating correctly.
-# The next step is to write the operations.
+# The purpose of this project is to build a simple class that correctly parses Complex numbers.
+# It also handles operations on said Complex numbers.

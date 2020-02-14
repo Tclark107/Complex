@@ -5,6 +5,8 @@
 // pa6
 // Fill in the function definitions below. See class notes, or the project 
 // description for the definitions of the complex arithmetic operations.
+//
+// Simple class that makes it easy to handle complex numbers.
 //-----------------------------------------------------------------------------
 
 class Complex{
@@ -127,21 +129,22 @@ class Complex{
     // Return a new Complex representing the reciprocal of this.
     // Throw an ArithmeticException with appropriate message if 
     // this.equals(Complex.ZERO).
-    Complex recip(){
-       //Complex r = (this.mult(conj()).div(conj()));
+   Complex recip(){
+      if(this.equals(Complex.ZERO)) throw new ArithmeticException("Error: Denominator is equal to zero");
       Complex r = conj().div(this.mult(conj()));
-       return r;
-    }
+      return r;
+   }
  
     // div()
     // Return a new Complex representing the quotient of this by z.
     // Throw an ArithmeticException with appropriate message if 
     // z.equals(Complex.ZERO).
-    Complex div(Complex z){
-       double real = ((re*z.re) + (im*z.im))/((z.re*z.re) + (z.im*z.im));
-       double imag = ((z.re*im) - (re*z.im))/((z.re*z.re) + (z.im*z.im));
-       return(new Complex(real, imag));
-    }
+   Complex div(Complex z){
+      if(z.equals(Complex.ZERO)) throw new ArithmeticException("Error: Denominator is equal to zero");
+      double real = ((re*z.re) + (im*z.im))/((z.re*z.re) + (z.im*z.im));
+      double imag = ((z.re*im) - (re*z.im))/((z.re*z.re) + (z.im*z.im));
+      return(new Complex(real, imag));
+   }
  
     // conj()
     // Return a new Complex representing the conjugate of this Complex.
